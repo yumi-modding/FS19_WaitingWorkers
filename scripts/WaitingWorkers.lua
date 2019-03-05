@@ -11,9 +11,8 @@
 WaitingWorkers = {};
 WaitingWorkers.myCurrentModDirectory = g_currentModDirectory;
 
-WaitingWorkers.debug = true --false --
--- TODO:
-
+WaitingWorkers.debug = false --true --
+-- TODO: Capability to change waiting time
 
 -- @doc First code called during map loading (before we can actually interact)
 function WaitingWorkers:loadMap(name)
@@ -32,33 +31,6 @@ function WaitingWorkers:deleteMap()
   self.initialized = false;
 end;
  
--- @doc register InputBindings if any
-function WaitingWorkers:registerActionEvents()
-  if WaitingWorkers.debug then print("WaitingWorkers:registerActionEvents()") end
-  -- for _,actionName in pairs({ "" }) do
-  --   -- print("actionName "..actionName)
-  --   local __, eventName, event, action = InputBinding.registerActionEvent(g_inputBinding, actionName, self, WaitingWorkers.activateWorker ,false ,true ,false ,true)
-  --   -- print("__ "..tostring(__))
-  --   -- print("eventName "..eventName)
-  --   -- print("event "..tostring(event))
-  --   -- print("action "..tostring(action))
-  --   if __ then
-  --     g_inputBinding.events[eventName].displayIsVisible = false
-  --   end
-  --   -- DebugUtil.printTableRecursively(actionName, " ", 1, 2);
-  --   --__, eventName = self:addActionEvent(self.actionEvents, actionName, self, WaitingWorkers.activateWorker, false, true, false, true)
-  -- end
-  
-end
-
--- @doc registerActionEvents need to be called regularly
-function WaitingWorkers:appRegisterActionEvents()
-  if WaitingWorkers.debug then print("WaitingWorkers:appRegisterActionEvents()") end
-  WaitingWorkers:registerActionEvents()
-end
--- Only needed for global action event 
-FSBaseMission.registerActionEvents = Utils.appendedFunction(FSBaseMission.registerActionEvents, WaitingWorkers.appRegisterActionEvents);
-
 -- @doc Called once at the beginning when nothing is initialized yet
 function WaitingWorkers:init()
   if WaitingWorkers.debug then print("WaitingWorkers:init()") end
@@ -110,15 +82,9 @@ function WaitingWorkers:replaceOnAIImplementEnd(superfunc)
 end
 TurnOnVehicle.onAIImplementEnd = Utils.overwrittenFunction(TurnOnVehicle.onAIImplementEnd, WaitingWorkers.replaceOnAIImplementEnd)
 
--- @doc Draw something
-function WaitingWorkers:draw()
-  --if WaitingWorkersWorker.debug then print("WaitingWorkers:draw()") end
-
-end
-
 -- @doc Check timers during map update calls
 function WaitingWorkers:update(dt)
-  -- print("WaitingWorkers:update ")
+  -- if WaitingWorkers.debug then print("WaitingWorkers:update ") end
   -- DebugUtil.printTableRecursively(self.implementStopTimers, " ", 1, 3);
   -- DebugUtil.printTableRecursively(self.engineStopTimers, " ", 1, 3);
 
