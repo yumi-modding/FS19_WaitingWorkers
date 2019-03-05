@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<modDesc descVersion="41">
+  <author>yumi</author>
+  <version>1.0.0.beta</version>
+  <contributors>yumi</contributors>
+  <title>
+    <en>Waiting workers</en>
+    <de>Waiting workers</de>
+    <fr>Waiting workers</fr>
+  </title>
+  <description>
+    <en><![CDATA[
+    When using workers you often encounter the situation where a worker informs that he has completed his task while in fact some part of the field remains to be done.
+    So you must restart the tractor/combine, restart the implement and replace the worker. In a crooked field, this can happen many times and become boring.
+    With this mod, the worker will wait a given time before stopping the tool and finally the engine. This will also allow you to regain control of a worker faster when you manually stop it.
+
+    By default the implement is stopped after 2 minutes (except for sprayer that is stopped directly as usual). The engine is stopped after 3 minutes.
+    You are informed by a notification that the vehicle has been stopped.
+
+    ==== CHANGELOG ====
+    New in v1.0.0.0
+     - First public release
+
+    ]]></en>
+    <de><![CDATA[
+    Bei der Verwendung von Arbeitern stoßen Sie häufig auf die Situation, in der ein Arbeitnehmer informiert, dass er seine Aufgabe erfüllt hat, während tatsächlich ein Teil des Feldes noch erledigt werden muss.
+    Sie müssen also den Traktor / Mähdrescher neu starten, die Maschine neu starten und den Arbeiter austauschen. In einem krummen Feld kann dies oft vorkommen und langweilig werden.
+    Mit diesem Mod wartet der Arbeiter eine bestimmte Zeit, bevor er das Werkzeug und schließlich den Motor anhält. Auf diese Weise können Sie auch die Kontrolle über einen Arbeiter schneller wiedererlangen, wenn Sie ihn manuell stoppen.
+
+    Standardmäßig wird das Arbeitsgerät nach 2 Minuten angehalten (außer bei Spritzgeräten, die wie gewohnt direkt angehalten werden). Der Motor wird nach 3 Minuten gestoppt.
+    Sie werden durch eine Benachrichtigung darüber informiert, dass das Fahrzeug angehalten wurde.
+
+    ==== CHANGELOG ====
+    New in v1.0.0.0
+     - First public release
+
+    ]]></de>
+    <fr><![CDATA[
+    Lorsque vous utilisez des travailleurs, vous rencontrez souvent la situation dans laquelle un travailleur informe qu'il a terminé sa tâche alors qu'en réalité, une partie du champ reste à faire.
+    Vous devez donc redémarrer le tracteur / la moissonneuse-batteuse, redémarrer l'outil et replacer le travailleur. Dans un champ tordu, cela peut arriver plusieurs fois et devenir ennuyeux.
+    Avec ce mod, le travailleur attendra un temps donné avant d'arrêter l'outil et enfin le moteur. Cela vous permettra également de reprendre le contrôle d'un ouvrier plus rapidement lorsque vous l'arrêtez manuellement.
+
+    Par défaut, l'outil est arrêté après 2 minutes (à l'exception du pulvérisateur qui s'arrête directement comme d'habitude). Le moteur est arrêté après 3 minutes.
+    Vous êtes informé par une notification que le véhicule a été arrêté.
+
+    ==== CHANGELOG ====
+    Nouveau en v1.3.0.0
+     - Premiere release publique
+
+    ]]></fr>
+  </description>
+  <iconFilename>images/WaitingWorkers.dds</iconFilename>
+
+  <l10n filenamePrefix="modDesc_l10n" /> <!-- Load the corresponding modDesc_l10n_<language>.XML file, or revert to 'en'/'de'. -->
+
+  <extraSourceFiles>
+    <sourceFile filename="scripts/WaitingWorkers.lua" />
+  </extraSourceFiles>
+  
+  <actions>
+    <!-- <action name="ContractorMod_WORKER1" category="ONFOOT VEHICLE"/> -->
+  </actions>
+  <inputBinding>
+    <!-- <actionBinding action="ContractorMod_WORKER1">
+        <binding device="KB_MOUSE_DEFAULT" input="KEY_lctrl KEY_1" axisComponent="+" inputComponent="+" index="1"/>
+    </actionBinding> -->
+  </inputBinding>
+
+</modDesc>
+    
