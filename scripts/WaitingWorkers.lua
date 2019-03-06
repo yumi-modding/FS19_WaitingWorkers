@@ -57,20 +57,35 @@ function WaitingWorkers:replaceOnAIEnd(superfunc)
 end
 Motorized.onAIEnd = Utils.overwrittenFunction(Motorized.onAIEnd, WaitingWorkers.replaceOnAIEnd)
 
--- @doc Prevent to stop motor when worker has been stopped and restarted
-function WaitingWorkers:appStartAIVehicle()
-  if WaitingWorkers.debug then print("WaitingWorkers:appStartAIVehicle ") end
-  local vehicleID = NetworkUtil.getObjectId(self)
-  if WaitingWorkers.engineStopTimers ~= nil then
-    for i=#WaitingWorkers.engineStopTimers, 1, -1 do
-      if WaitingWorkers.engineStopTimers[i].id == vehicleID then
-        table.remove(WaitingWorkers.engineStopTimers, i)
-        break
+-- @doc Prevent to stop motor and implements when player takes back vehicle control 
+function WaitingWorkers:appStopAIVehicle(reason, noEventSend)
+  if WaitingWorkers.debug then print("WaitingWorkers:appStopAIVehicle>>") end
+  -- DebugUtil.printTableRecursively(WaitingWorkers.implementStopTimers, " ", 1, 3);
+  -- DebugUtil.printTableRecursively(WaitingWorkers.engineStopTimers, " ", 1, 3);
+  if self:getIsControlled() and reason ~= nil and reason == AIVehicle.STOP_REASON_USER then
+    if WaitingWorkers.debug then print("WaitingWorkers:appStopAIVehicle STOP_REASON_USER") end
+    local vehicleID = NetworkUtil.getObjectId(self)
+    if WaitingWorkers.engineStopTimers ~= nil then
+      for i=#WaitingWorkers.engineStopTimers, 1, -1 do
+        if WaitingWorkers.engineStopTimers[i].id == vehicleID then
+          table.remove(WaitingWorkers.engineStopTimers, i)
+          if WaitingWorkers.implementStopTimers ~= nil then
+            for j=#WaitingWorkers.implementStopTimers, 1, -1 do
+              if WaitingWorkers.implementStopTimers[j].rootId == vehicleID then
+                table.remove(WaitingWorkers.implementStopTimers, j)
+              end
+            end
+          end
+          break
+        end
       end
     end
   end
+  -- DebugUtil.printTableRecursively(WaitingWorkers.implementStopTimers, " ", 1, 3);
+  -- DebugUtil.printTableRecursively(WaitingWorkers.engineStopTimers, " ", 1, 3);
+  if WaitingWorkers.debug then print("WaitingWorkers:appStopAIVehicle<<") end
 end
-AIVehicle.startAIVehicle = Utils.appendedFunction(AIVehicle.startAIVehicle, WaitingWorkers.appStartAIVehicle)
+AIVehicle.stopAIVehicle = Utils.appendedFunction(AIVehicle.stopAIVehicle, WaitingWorkers.appStopAIVehicle)
 
 -- @doc Prevent to stop implement when worker end
 function WaitingWorkers:replaceOnAIImplementEnd(superfunc)
@@ -88,8 +103,14 @@ function WaitingWorkers:replaceOnAIImplementEnd(superfunc)
     end
   end
   local implementID = NetworkUtil.getObjectId(self)
+  local rootVehicle = self:getRootVehicle()
+  local rootId = nil
+  if rootVehicle ~= nil then
+    rootId = NetworkUtil.getObjectId(rootVehicle)
+  end
   table.insert(WaitingWorkers.implementStopTimers, {
     id = implementID,
+    rootId = rootId,
     timer = WaitingWorkers.implementStopTimerDuration,
     superfunc = superfunc
   })
@@ -111,6 +132,22 @@ function WaitingWorkers:appOnAIImplementStart()
   end
 end
 TurnOnVehicle.onAIImplementStart = Utils.appendedFunction(TurnOnVehicle.onAIImplementStart, WaitingWorkers.appOnAIImplementStart)
+
+-- function WaitingWorkers:draw()
+--   setTextBold(true);
+--   setTextAlignment(RenderText.ALIGN_RIGHT);
+  
+--   setTextColor(1.0, 1.0, 1.0, 1.0);
+  
+--   if WaitingWorkers.debug then
+--     renderText(0.9828, 0.42, 0.012, "self.implementStopTimers")
+--     DebugUtil.renderTable(0.9828, 0.40, 0.02, WaitingWorkers.implementStopTimers)
+--     renderText(0.9828, 0.32, 0.012, "self.engineStopTimers")
+--     DebugUtil.renderTable(0.9828, 0.30, 0.02, WaitingWorkers.engineStopTimers)
+--   end
+--   -- Restore default alignment (to avoid impacting other mods like FarmingTablet)
+--   setTextAlignment(RenderText.ALIGN_LEFT);
+-- end
 
 -- @doc Check timers during map update calls
 function WaitingWorkers:update(dt)
