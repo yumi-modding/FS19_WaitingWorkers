@@ -133,22 +133,6 @@ function WaitingWorkers:appOnAIImplementStart()
 end
 TurnOnVehicle.onAIImplementStart = Utils.appendedFunction(TurnOnVehicle.onAIImplementStart, WaitingWorkers.appOnAIImplementStart)
 
--- function WaitingWorkers:draw()
---   setTextBold(true);
---   setTextAlignment(RenderText.ALIGN_RIGHT);
-  
---   setTextColor(1.0, 1.0, 1.0, 1.0);
-  
---   if WaitingWorkers.debug then
---     renderText(0.9828, 0.42, 0.012, "self.implementStopTimers")
---     DebugUtil.renderTable(0.9828, 0.40, 0.02, WaitingWorkers.implementStopTimers)
---     renderText(0.9828, 0.32, 0.012, "self.engineStopTimers")
---     DebugUtil.renderTable(0.9828, 0.30, 0.02, WaitingWorkers.engineStopTimers)
---   end
---   -- Restore default alignment (to avoid impacting other mods like FarmingTablet)
---   setTextAlignment(RenderText.ALIGN_LEFT);
--- end
-
 -- @doc Check timers during map update calls
 function WaitingWorkers:update(dt)
   -- if WaitingWorkers.debug then print("WaitingWorkers:update ") end
