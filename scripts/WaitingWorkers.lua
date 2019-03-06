@@ -1,7 +1,7 @@
 --
 -- WaitingWorkers
 -- Specialization for preventing worker to stop engine and tools when task is finished.
--- Only stop after a given time and inform.z
+-- Only stop after a given time and inform.
 -- Update attached to update event of the map
 --
 -- @author  yumi
@@ -47,7 +47,7 @@ end
 -- @doc Prevent to stop motor when worker end
 function WaitingWorkers:replaceOnAIEnd(superfunc)
   if WaitingWorkers.debug then print("WaitingWorkers:replaceOnAIEnd "..tostring(self:getFullName())) end
-  vehicleID = NetworkUtil.getObjectId(self)
+  local vehicleID = NetworkUtil.getObjectId(self)
   table.insert(WaitingWorkers.engineStopTimers, {
     id = vehicleID,
     timer = WaitingWorkers.engineStopTimerDuration,
@@ -56,6 +56,21 @@ function WaitingWorkers:replaceOnAIEnd(superfunc)
   return
 end
 Motorized.onAIEnd = Utils.overwrittenFunction(Motorized.onAIEnd, WaitingWorkers.replaceOnAIEnd)
+
+-- @doc Prevent to stop motor when worker has been stopped and restarted
+function WaitingWorkers:appStartAIVehicle()
+  if WaitingWorkers.debug then print("WaitingWorkers:appStartAIVehicle ") end
+  local vehicleID = NetworkUtil.getObjectId(self)
+  if WaitingWorkers.engineStopTimers ~= nil then
+    for i=#WaitingWorkers.engineStopTimers, 1, -1 do
+      if WaitingWorkers.engineStopTimers[i].id == vehicleID then
+        table.remove(WaitingWorkers.engineStopTimers, i)
+        break
+      end
+    end
+  end
+end
+AIVehicle.startAIVehicle = Utils.appendedFunction(AIVehicle.startAIVehicle, WaitingWorkers.appStartAIVehicle)
 
 -- @doc Prevent to stop implement when worker end
 function WaitingWorkers:replaceOnAIImplementEnd(superfunc)
@@ -72,7 +87,7 @@ function WaitingWorkers:replaceOnAIImplementEnd(superfunc)
       end
     end
   end
-  implementID = NetworkUtil.getObjectId(self)
+  local implementID = NetworkUtil.getObjectId(self)
   table.insert(WaitingWorkers.implementStopTimers, {
     id = implementID,
     timer = WaitingWorkers.implementStopTimerDuration,
@@ -81,6 +96,21 @@ function WaitingWorkers:replaceOnAIImplementEnd(superfunc)
   return
 end
 TurnOnVehicle.onAIImplementEnd = Utils.overwrittenFunction(TurnOnVehicle.onAIImplementEnd, WaitingWorkers.replaceOnAIImplementEnd)
+
+-- @doc Prevent to stop implement when worker has been stopped and restarted
+function WaitingWorkers:appOnAIImplementStart()
+  if WaitingWorkers.debug then print("WaitingWorkers:appOnAIImplementStart ") end
+  local implementID = NetworkUtil.getObjectId(self)
+  if WaitingWorkers.implementStopTimers ~= nil then
+    for i=#WaitingWorkers.implementStopTimers, 1, -1 do
+      if WaitingWorkers.implementStopTimers[i].id == implementID then
+        table.remove(WaitingWorkers.implementStopTimers, i)
+        break
+      end
+    end
+  end
+end
+TurnOnVehicle.onAIImplementStart = Utils.appendedFunction(TurnOnVehicle.onAIImplementStart, WaitingWorkers.appOnAIImplementStart)
 
 -- @doc Check timers during map update calls
 function WaitingWorkers:update(dt)

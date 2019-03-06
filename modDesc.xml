@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no" ?>
 <modDesc descVersion="41">
   <author>yumi</author>
-  <version>1.0.0.beta</version>
+  <version>1.0.0.0</version>
   <contributors>yumi</contributors>
   <title>
     <en>Waiting workers</en>
@@ -56,15 +56,5 @@
   <extraSourceFiles>
     <sourceFile filename="scripts/WaitingWorkers.lua" />
   </extraSourceFiles>
-  
-  <actions>
-    <!-- <action name="ContractorMod_WORKER1" category="ONFOOT VEHICLE"/> -->
-  </actions>
-  <inputBinding>
-    <!-- <actionBinding action="ContractorMod_WORKER1">
-        <binding device="KB_MOUSE_DEFAULT" input="KEY_lctrl KEY_1" axisComponent="+" inputComponent="+" index="1"/>
-    </actionBinding> -->
-  </inputBinding>
 
 </modDesc>
-    
