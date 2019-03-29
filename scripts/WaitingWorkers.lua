@@ -62,8 +62,9 @@ function WaitingWorkers:appStopAIVehicle(reason, noEventSend)
   if WaitingWorkers.debug then print("WaitingWorkers:appStopAIVehicle>>") end
   -- DebugUtil.printTableRecursively(WaitingWorkers.implementStopTimers, " ", 1, 3);
   -- DebugUtil.printTableRecursively(WaitingWorkers.engineStopTimers, " ", 1, 3);
-  if self:getIsControlled() and reason ~= nil and reason == AIVehicle.STOP_REASON_USER then
-    if WaitingWorkers.debug then print("WaitingWorkers:appStopAIVehicle STOP_REASON_USER") end
+  if self:getIsControlled() then --and reason ~= nil and reason == AIVehicle.STOP_REASON_USER then
+    -- Won't stop engine or implement if vehicle is controlled 
+    if WaitingWorkers.debug then print("WaitingWorkers:appStopAIVehicle Worker vehicle is controlled") end
     local vehicleID = NetworkUtil.getObjectId(self)
     if WaitingWorkers.engineStopTimers ~= nil then
       for i=#WaitingWorkers.engineStopTimers, 1, -1 do
