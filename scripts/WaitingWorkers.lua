@@ -48,6 +48,7 @@ end
 function WaitingWorkers:replaceOnAIEnd(superfunc)
   if WaitingWorkers.debug then print("WaitingWorkers:replaceOnAIEnd "..tostring(self:getFullName())) end
   local vehicleID = NetworkUtil.getObjectId(self)
+  -- print("WaitingWorkers:startTimer "..tostring(self:getFullName()))
   table.insert(WaitingWorkers.engineStopTimers, {
     id = vehicleID,
     timer = WaitingWorkers.engineStopTimerDuration,
@@ -70,10 +71,12 @@ function WaitingWorkers:appStopAIVehicle(reason, noEventSend)
       for i=#WaitingWorkers.engineStopTimers, 1, -1 do
         if WaitingWorkers.engineStopTimers[i].id == vehicleID then
           table.remove(WaitingWorkers.engineStopTimers, i)
+          -- print("WaitingWorkers:stopTimer "..tostring(self:getFullName()))
           if WaitingWorkers.implementStopTimers ~= nil then
             for j=#WaitingWorkers.implementStopTimers, 1, -1 do
               if WaitingWorkers.implementStopTimers[j].rootId == vehicleID then
                 table.remove(WaitingWorkers.implementStopTimers, j)
+                -- print("WaitingWorkers:stopTimer tool "..tostring(self:getFullName()))
               end
             end
           end
@@ -127,6 +130,7 @@ function WaitingWorkers:appOnAIImplementStart()
     for i=#WaitingWorkers.implementStopTimers, 1, -1 do
       if WaitingWorkers.implementStopTimers[i].id == implementID then
         table.remove(WaitingWorkers.implementStopTimers, i)
+        -- print("WaitingWorkers:stopTimer tool "..tostring(self:getFullName()))
         break
       end
     end
@@ -154,8 +158,10 @@ function WaitingWorkers:update(dt)
   for i=#self.implementStopTimers, 1, -1 do
     local implement = self.implementStopTimers[i]
     if implement ~= nil then
-      if implement.timer <= 0 then
+      local v = NetworkUtil.getObject(implement.rootId)
+      if implement.timer <= 0 or (v ~= nil and v:getIsControlled()) then
         table.remove(self.implementStopTimers, i)
+        -- print("WaitingWorkers:stopTimer tool "..tostring(v:getFullName()))
       end
     end
   end
@@ -170,12 +176,14 @@ function WaitingWorkers:update(dt)
     end
   end
 
-  -- Clean table by removing already stopped engines
+  -- Clean table by removing already stopped engines or controlled vehicles
   for i=#self.engineStopTimers, 1, -1 do
     local vehicle = self.engineStopTimers[i]
     if vehicle ~= nil then
-      if vehicle.timer <= 0 then
+      local v = NetworkUtil.getObject(vehicle.id)
+      if vehicle.timer <= 0 or (v ~= nil and v:getIsControlled()) then
         table.remove(self.engineStopTimers, i)
+        -- print("WaitingWorkers:stopTimer "..tostring(v:getFullName()))
       end
     end
   end
