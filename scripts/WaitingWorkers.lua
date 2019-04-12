@@ -222,7 +222,7 @@ function WaitingWorkers:displayNotif(item)
       if g_currentMission.player ~= nil then
         if g_currentMission.accessHandler:canPlayerAccess(item) then
           g_currentMission:addIngameNotification(FSBaseMission.INGAME_NOTIFICATION_OK,
-          item:getFullName() .. g_i18n:getText("WaitingWorkers_VEHICLE_HAS_STOPPED"))
+          item:getFullName() .. " " .. g_i18n:getText("WaitingWorkers_VEHICLE_HAS_STOPPED"))
           -- string.format(g_i18n:getText("WaitingWorkers_VEHICLE_HAS_STOPPED")), item:getFullName())
           --item:getFullName().." has stopped due to inactivity.")
         end
