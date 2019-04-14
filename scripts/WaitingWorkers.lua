@@ -70,6 +70,7 @@ function WaitingWorkers:appStopAIVehicle(reason, noEventSend)
     if WaitingWorkers.engineStopTimers ~= nil then
       for i=#WaitingWorkers.engineStopTimers, 1, -1 do
         if WaitingWorkers.engineStopTimers[i].id == vehicleID then
+          self:restoreVehicleCharacter()
           table.remove(WaitingWorkers.engineStopTimers, i)
           -- print("WaitingWorkers:stopTimer "..tostring(self:getFullName()))
           if WaitingWorkers.implementStopTimers ~= nil then
@@ -137,6 +138,24 @@ function WaitingWorkers:appOnAIImplementStart()
   end
 end
 TurnOnVehicle.onAIImplementStart = Utils.appendedFunction(TurnOnVehicle.onAIImplementStart, WaitingWorkers.appOnAIImplementStart)
+
+-- @doc Prevent to remove driver character when worker is waiting
+function WaitingWorkers:ReplaceRestoreVehicleCharacter(superfunc)
+  if WaitingWorkers.debug then print("WaitingWorkers:ReplaceRestoreVehicleCharacter ") end
+  if WaitingWorkers.engineStopTimers ~= nil then
+    for _, vehicle in pairs(WaitingWorkers.engineStopTimers) do
+      if vehicle ~= nil then
+        if vehicle.id == NetworkUtil.getObjectId(self) then
+          if WaitingWorkers.debug then print("WaitingWorkers:ReplaceRestoreVehicleCharacter delete character") end
+          superfunc(self)
+        end
+      end
+    end
+  end
+  if WaitingWorkers.debug then print("WaitingWorkers:ReplaceRestoreVehicleCharacter keep character") end
+  return
+end
+Enterable.restoreVehicleCharacter = Utils.overwrittenFunction(Enterable.restoreVehicleCharacter, WaitingWorkers.ReplaceRestoreVehicleCharacter)
 
 -- @doc Check timers during map update calls
 function WaitingWorkers:update(dt)
@@ -209,6 +228,7 @@ function WaitingWorkers:stopEngine(vehicle)
     local v = NetworkUtil.getObject(vehicle.id)
     if v ~= nil then
       vehicle.superfunc(v)
+      v:restoreVehicleCharacter()
       WaitingWorkers:displayNotif(v)
     end
   end
