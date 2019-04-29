@@ -5,7 +5,7 @@
   <contributors>yumi</contributors>
   <title>
     <en>Waiting workers</en>
-    <de>Helfer warten</de>
+    <de>Wartender Helfer</de>
     <fr>Ouvriers en attente</fr>
   </title>
   <description>
@@ -16,15 +16,15 @@ With this mod, the worker will wait a given time before stopping the tool and fi
 
 By default the implement is stopped after 2 minutes (except for sprayer that is stopped directly as usual). The engine is stopped after 3 minutes.
 You are informed by a notification that the vehicle has been stopped.
- ]]></en>
+]]></en>
     <de><![CDATA[
-Bei der Verwendung von Helfer stoßen Sie häufig auf die Situation, in der ein Helfer informiert, dass er seine Aufgabe erfüllt hat, während tatsächlich ein Teil des Feldes noch erledigt werden muss.
-Sie müssen also den Traktor / Mähdrescher neu starten, die Maschine neu starten und den Helfer austauschen. In einem krummen Feld kann dies oft vorkommen und langweilig werden.
-Mit diesem Mod wartet der Helfer eine bestimmte Zeit, bevor er das Werkzeug und schließlich den Motor anhält. Auf diese Weise können Sie auch die Kontrolle über einen Helfer schneller wiedererlangen, wenn Sie ihn manuell stoppen.
+Bei der Verwendung von Helfern stoßen Sie häufig auf die Situation, in der ein Helfer angibt, seine Aufgabe erfüllt zu haben, während tatsächlich ein Teil des Feldes noch erledigt wurde.
+Sie müssen also den Motor des Traktors/Mähdreschers neu starten, die Maschine neu starten und den Helfer wieder einstellen. Auf einem krummen Feld kann dies öfter vorkommen und nervig werden.
+Mit diesem Mod wartet der Helfer eine bestimmte Zeit, bevor er das Anbaugerät und schließlich den Motor ausschaltet. Auf diese Weise können Sie auch die Kontrolle über einen Helfer wieder schneller übernehmen, wenn Sie ihn manuell stoppen.
 
-Standardmäßig wird das Arbeitsgerät nach 2 Minuten angehalten (außer bei Spritzgeräten, die wie gewohnt direkt angehalten werden). Der Motor wird nach 3 Minuten gestoppt.
-Sie werden durch eine Benachrichtigung darüber informiert, dass das Fahrzeug angehalten wurde.
-]]></de>
+Standardmäßig wird das Arbeitsgerät nach 2 Minuten ausgeschaltet (außer bei Feldspritzen, die wie gewohnt direkt ausgeschaltet werden). Der Motor wird nach 3 Minuten gestoppt.
+Sie werden durch eine Benachrichtigung darüber informiert, wenn das Fahrzeug angehalten wurde.
+]]></de> 
     <fr><![CDATA[
 Lorsque vous utilisez des ouvriers, vous rencontrez souvent la situation dans laquelle un ouvrier informe qu'il a terminé sa tâche alors qu'en réalité, une partie du champ reste à faire.
 Vous devez donc redémarrer le tracteur / la moissonneuse-batteuse, redémarrer l'outil et replacer l'ouvrier. Dans un champ tordu, cela peut arriver plusieurs fois et devenir ennuyeux.
