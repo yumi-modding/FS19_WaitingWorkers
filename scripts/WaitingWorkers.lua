@@ -139,6 +139,33 @@ function WaitingWorkers:appOnAIImplementStart()
 end
 TurnOnVehicle.onAIImplementStart = Utils.appendedFunction(TurnOnVehicle.onAIImplementStart, WaitingWorkers.appOnAIImplementStart)
 
+-- @doc Prevent to lift the implement when Player takes back control inside the field
+function WaitingWorkers:ReplaceOnAIImplementEndLine(superfunc)
+  if WaitingWorkers.debug then print("WaitingWorkers:ReplaceOnAIImplementEndLine ") end
+  local spec = self.spec_attachable
+  local attacherVehicle = spec.attacherVehicle
+  if attacherVehicle ~= nil then
+    -- print("WaitingWorkers:ReplaceOnAIImplementEndLine attacherVehicle "..tostring(attacherVehicle:getName()))
+    local vX,vY,vZ = getWorldTranslation(attacherVehicle:getAIVehicleSteeringNode())
+    local dt = 1  --unused value
+    -- print("WaitingWorkers:ReplaceOnAIImplementEndLine getAIVehicleSteeringNode "..tostring(vX)..";"..tostring(vY)..";"..tostring(vZ))
+    local spec_aiVehicle = attacherVehicle.spec_aiVehicle
+    if spec_aiVehicle ~= nil and #spec_aiVehicle.driveStrategies > 0 then
+      -- Only consider 1st strategy to know if we are in the field
+      local driveStrategy = spec_aiVehicle.driveStrategies[1]
+      -- print("WaitingWorkers:driveStrategy"..tostring(driveStrategy))
+      local distanceToEndOfField, hasField, ownedField = driveStrategy:getDistanceToEndOfField(dt, vX,vY,vZ)
+      -- print("WaitingWorkers:ReplaceOnAIImplementEndLine distanceToEndOfField "..tostring(distanceToEndOfField))
+      if attacherVehicle:getIsControlled() and distanceToEndOfField > 0 then
+        -- Player takes back control inside the field => we don't want to lift the implement
+        return
+      end
+    end
+  end
+  superfunc(self)
+end
+Attachable.onAIImplementEndLine = Utils.overwrittenFunction(Attachable.onAIImplementEndLine, WaitingWorkers.ReplaceOnAIImplementEndLine)
+
 -- @doc Prevent to remove driver character when worker is waiting
 function WaitingWorkers:ReplaceRestoreVehicleCharacter(superfunc)
   if WaitingWorkers.debug then print("WaitingWorkers:ReplaceRestoreVehicleCharacter ") end

@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no" ?>
-<modDesc descVersion="43">
+<modDesc descVersion="51">
   <author>yumi</author>
   <version>1.0.0.0</version>
   <contributors>yumi</contributors>
   <title>
-    <en>Waiting workers</en>
-    <de>Wartender Helfer</de>
-    <fr>Ouvriers en attente</fr>
+    <en>Waiting Workers</en>
+    <de>Wartende Helfer</de>
+    <fr>Ouvriers En Attente</fr>
   </title>
   <description>
     <en><![CDATA[
@@ -16,14 +16,22 @@ With this mod, the worker will wait a given time before stopping the tool and fi
 
 By default the implement is stopped after 2 minutes (except for sprayer that is stopped directly as usual). The engine is stopped after 3 minutes.
 You are informed by a notification that the vehicle has been stopped.
+
+==== CHANGELOG ====
+New in v1.0.1.0
+  - Prevent lifting the implement when the player regains control of a worker within a field
 ]]></en>
     <de><![CDATA[
-Bei der Verwendung von Helfern stoßen Sie häufig auf die Situation, in der ein Helfer angibt, seine Aufgabe erfüllt zu haben, während tatsächlich ein Teil des Feldes noch erledigt wurde.
+Bei der Verwendung von Helfern stoßen Sie häufig auf eine Situation, in der ein Helfer angibt, seine Aufgabe erfüllt zu haben, während tatsächlich ein Teil des Feldes noch nicht erledigt wurde.
 Sie müssen also den Motor des Traktors/Mähdreschers neu starten, die Maschine neu starten und den Helfer wieder einstellen. Auf einem krummen Feld kann dies öfter vorkommen und nervig werden.
 Mit diesem Mod wartet der Helfer eine bestimmte Zeit, bevor er das Anbaugerät und schließlich den Motor ausschaltet. Auf diese Weise können Sie auch die Kontrolle über einen Helfer wieder schneller übernehmen, wenn Sie ihn manuell stoppen.
 
 Standardmäßig wird das Arbeitsgerät nach 2 Minuten ausgeschaltet (außer bei Feldspritzen, die wie gewohnt direkt ausgeschaltet werden). Der Motor wird nach 3 Minuten gestoppt.
 Sie werden durch eine Benachrichtigung darüber informiert, wenn das Fahrzeug angehalten wurde.
+
+==== CHANGELOG ====
+New in v1.0.1.0
+  - Verhindern Sie das Anheben des Arbeitsgerät, wenn der Spieler die Kontrolle über einen Helfer auf einem Feld wiedererlangt
 ]]></de> 
     <fr><![CDATA[
 Lorsque vous utilisez des ouvriers, vous rencontrez souvent la situation dans laquelle un ouvrier informe qu'il a terminé sa tâche alors qu'en réalité, une partie du champ reste à faire.
@@ -32,6 +40,10 @@ Avec ce mod, l'ouvrier attendra un temps donné avant d'arrêter l'outil et enfi
 
 Par défaut, l'outil est arrêté après 2 minutes (à l'exception du pulvérisateur qui s'arrête directement comme d'habitude). Le moteur est arrêté après 3 minutes.
 Vous êtes informé par une notification que le véhicule a été arrêté.
+
+==== CHANGELOG ====
+New in v1.0.1.0
+  - Empêche de lever l'outil lorsque que le joueur reprend le contrôle d'un ouvrier au milieu d'un champ
 ]]></fr>
   </description>
   <iconFilename>images/WaitingWorkers.dds</iconFilename>
