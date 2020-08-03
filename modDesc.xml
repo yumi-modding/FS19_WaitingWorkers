@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no" ?>
 <modDesc descVersion="51">
   <author>yumi</author>
-  <version>1.0.0.0</version>
+  <version>1.0.0.1</version>
   <contributors>yumi</contributors>
   <title>
     <en>Waiting Workers</en>
@@ -18,7 +18,7 @@ By default the implement is stopped after 2 minutes (except for sprayer that is 
 You are informed by a notification that the vehicle has been stopped.
 
 ==== CHANGELOG ====
-New in v1.0.1.0
+New in v1.0.0.1
   - Prevent lifting the implement when the player regains control of a worker within a field
 ]]></en>
     <de><![CDATA[
@@ -30,7 +30,7 @@ Standardmäßig wird das Arbeitsgerät nach 2 Minuten ausgeschaltet (außer bei 
 Sie werden durch eine Benachrichtigung darüber informiert, wenn das Fahrzeug angehalten wurde.
 
 ==== CHANGELOG ====
-New in v1.0.1.0
+New in v1.0.0.1
   - Verhindern Sie das Anheben des Arbeitsgerät, wenn der Spieler die Kontrolle über einen Helfer auf einem Feld wiedererlangt
 ]]></de> 
     <fr><![CDATA[
@@ -42,7 +42,7 @@ Par défaut, l'outil est arrêté après 2 minutes (à l'exception du pulvérisa
 Vous êtes informé par une notification que le véhicule a été arrêté.
 
 ==== CHANGELOG ====
-New in v1.0.1.0
+New in v1.0.0.1
   - Empêche de lever l'outil lorsque que le joueur reprend le contrôle d'un ouvrier au milieu d'un champ
 ]]></fr>
   </description>
