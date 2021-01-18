@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no" ?>
 <modDesc descVersion="51">
   <author>yumi</author>
-  <version>1.0.0.2</version>
+  <version>1.0.0.3</version>
   <contributors>yumi</contributors>
   <title>
     <en>Waiting Workers</en>
@@ -22,6 +22,8 @@ New in v1.0.0.1
   - Prevent lifting the implement when the player regains control of a worker within a field
 Fixed in v1.0.0.2
   - Error when stopping worker in the field with several tools like Kuhn HR4004 + BTF4000
+Fixed in v1.0.0.3
+  - Fixing MP support
 ]]></en>
     <de><![CDATA[
 Bei der Verwendung von Helfern stoßen Sie häufig auf eine Situation, in der ein Helfer angibt, seine Aufgabe erfüllt zu haben, während tatsächlich ein Teil des Feldes noch nicht erledigt wurde.
@@ -36,6 +38,8 @@ New in v1.0.0.1
   - Verhindern Sie das Anheben des Arbeitsgerät, wenn der Spieler die Kontrolle über einen Helfer auf einem Feld wiedererlangt
 Fixed in v1.0.0.2
   - Fehler beim Stoppen des Helfer auf einem Feld mit mehreren Tools wie Kuhn HR4004 + BTF4000
+Fixed in v1.0.0.3
+  - MP-Unterstützung korrigieren
 ]]></de> 
     <fr><![CDATA[
 Lorsque vous utilisez des ouvriers, vous rencontrez souvent la situation dans laquelle un ouvrier informe qu'il a terminé sa tâche alors qu'en réalité, une partie du champ reste à faire.
@@ -50,9 +54,12 @@ New in v1.0.0.1
   - Empêche de lever l'outil lorsque que le joueur reprend le contrôle d'un ouvrier au milieu d'un champ
 Fixed in v1.0.0.2
   - Erreur lors du renvoi d'un ouvrier travaillant dans un champ avec plusieurs outils comme par exemple Kuhn HR4004 + BTF4000
+Fixed in v1.0.0.3
+  - Support MP
 ]]></fr>
   </description>
   <iconFilename>images/WaitingWorkers.dds</iconFilename>
+  <multiplayer supported="true"/>
 
   <l10n>
       <text name="WaitingWorkers_VEHICLE_HAS_STOPPED">
